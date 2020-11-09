@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTrOrdendetrabajoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idOrdenDeTrabajo}" for="idOrdenDeTrabajo" />
+                    <h:inputText id="idOrdenDeTrabajo" value="#{trOrdendetrabajoController.selected.idOrdenDeTrabajo}" title="#{bundle.EditTrOrdendetrabajoTitle_idOrdenDeTrabajo}" required="true" requiredMessage="#{bundle.EditTrOrdendetrabajoRequiredMessage_idOrdenDeTrabajo}"/>
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idPaciente}" for="idPaciente" />
+                    <h:inputText id="idPaciente" value="#{trOrdendetrabajoController.selected.idPaciente}" title="#{bundle.EditTrOrdendetrabajoTitle_idPaciente}" />
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idTratamiento}" for="idTratamiento" />
+                    <h:inputText id="idTratamiento" value="#{trOrdendetrabajoController.selected.idTratamiento}" title="#{bundle.EditTrOrdendetrabajoTitle_idTratamiento}" />
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idTipoDescuento}" for="idTipoDescuento" />
+                    <h:inputText id="idTipoDescuento" value="#{trOrdendetrabajoController.selected.idTipoDescuento}" title="#{bundle.EditTrOrdendetrabajoTitle_idTipoDescuento}" />
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_precio}" for="precio" />
+                    <h:inputText id="precio" value="#{trOrdendetrabajoController.selected.precio}" title="#{bundle.EditTrOrdendetrabajoTitle_precio}" />
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{trOrdendetrabajoController.selected.fechaDeAlta}" title="#{bundle.EditTrOrdendetrabajoTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idDoctor}" for="idDoctor" />
+                    <h:inputText id="idDoctor" value="#{trOrdendetrabajoController.selected.idDoctor}" title="#{bundle.EditTrOrdendetrabajoTitle_idDoctor}" />
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{trOrdendetrabajoController.selected.idUsuario}" title="#{bundle.EditTrOrdendetrabajoTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.EditTrOrdendetrabajoLabel_idCompra}" for="idCompra" />
+                    <h:inputText id="idCompra" value="#{trOrdendetrabajoController.selected.idCompra}" title="#{bundle.EditTrOrdendetrabajoTitle_idCompra}" />
+                </h:panelGrid>
+                <h:commandLink action="#{trOrdendetrabajoController.update}" value="#{bundle.EditTrOrdendetrabajoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTrOrdendetrabajoViewLink}"/>
+                <br />
+                <h:commandLink action="#{trOrdendetrabajoController.prepareList}" value="#{bundle.EditTrOrdendetrabajoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTrOrdendetrabajoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

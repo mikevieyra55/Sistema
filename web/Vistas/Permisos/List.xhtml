@@ -1,0 +1,77 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+    <ui:define name="title">Home</ui:define>
+    <ui:define name="content">
+        <body class="container">           
+            <div id="divAlert" class="#{mbPermisos.objTransacion.classDivContainer}">            
+                <div class="#{mbPermisos.objTransacion.classDiv}" role="alert" >
+                    <strong>#{mbPermisos.objTransacion.mensajeAlert}</strong> 
+                    <button class="#{mbPermisos.objTransacion.classButton}"  onclick="ocultarDivAlert();" />    
+                </div>
+            </div>
+            <div class="container">  
+                <h:form id="formMenus" >   
+                    <div class="container"> 
+                        <h:outputLabel value="Perfil:"  />
+                        <h:selectOneMenu class="form-control"
+                                         binding="#{mbPermisos.uiSelectPerfil}"
+                                         immediate="true">                           
+                            <f:selectItems value="#{mbPermisos.listaPerfiles}" var="perfil" />  
+                            <f:ajax listener="#{mbPermisos.actualizaCB}" render="example" />
+                        </h:selectOneMenu>
+                    </div>
+                    <br /><br />
+                    <div class="form-group-sm" >
+                        <h:dataTable id="example"
+                                     class="table table-responsive table-striped"
+                                     value="#{mbPermisos.listaPermisos}" 
+                                     var="item" border="0" cellpadding="2"
+                                     cellspacing="0" 
+                                     headerClass="text-center"
+                                     rowClasses="text-center"
+                                     binding="#{mbPermisos.htmlDataTable}"
+                                     >                      
+                            <h:column>
+                                <f:facet name="header">                       
+                                    Menu
+                                </f:facet>
+                                <h:outputText value="#{item.nombreMenu}"/>
+                            </h:column>                           
+                            <h:column>
+                                <f:facet name="header">
+                                    SubMenu
+                                </f:facet>
+                                <h:outputText value="#{item.nombreSubMenu}"/>
+                            </h:column>                         
+                            <h:column>
+                                <f:facet name="header">
+                                    Fecha Alta
+                                </f:facet>
+                                <h:outputText value="#{item.fechaDeAlta}"/>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    Elaborado por:
+                                </f:facet>
+                                <h:outputText value="#{item.nombreUsuario}"/>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    Activar/Desactivar
+                                </f:facet>  
+                                <h:commandLink                             
+                                    action="#{mbPermisos.activar}"
+                                    styleClass="#{item.classActivo}">            
+                                    <i class="#{item.iconActivo}"></i>                            
+                                </h:commandLink>
+                            </h:column>                        
+                        </h:dataTable> 
+                    </div>
+                </h:form>
+            </div>        
+        </body>
+    </ui:define>
+</ui:composition>

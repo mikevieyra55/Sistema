@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTrCitasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTrCitasEmpty}" rendered="#{trCitasController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{trCitasController.items.rowCount > 0}">
+                    <h:outputText value="#{trCitasController.pagination.pageFirstItem + 1}..#{trCitasController.pagination.pageLastItem + 1}/#{trCitasController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{trCitasController.previous}" value="#{bundle.Previous} #{trCitasController.pagination.pageSize}" rendered="#{trCitasController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{trCitasController.next}" value="#{bundle.Next} #{trCitasController.pagination.pageSize}" rendered="#{trCitasController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{trCitasController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_idCita}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCita}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_fechaDeAlta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeAlta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_fechaDeCita}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeCita}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_horaDeCita}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.horaDeCita}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_activo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_idPaciente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_idEstadoDeCita}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEstadoDeCita}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrCitasTitle_idDoctor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDoctor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{trCitasController.prepareView}" value="#{bundle.ListTrCitasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trCitasController.prepareEdit}" value="#{bundle.ListTrCitasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trCitasController.destroy}" value="#{bundle.ListTrCitasDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{trCitasController.prepareCreate}" value="#{bundle.ListTrCitasCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTrCitasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

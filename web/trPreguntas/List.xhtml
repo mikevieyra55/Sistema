@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTrPreguntasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTrPreguntasEmpty}" rendered="#{trPreguntasController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{trPreguntasController.items.rowCount > 0}">
+                    <h:outputText value="#{trPreguntasController.pagination.pageFirstItem + 1}..#{trPreguntasController.pagination.pageLastItem + 1}/#{trPreguntasController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{trPreguntasController.previous}" value="#{bundle.Previous} #{trPreguntasController.pagination.pageSize}" rendered="#{trPreguntasController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{trPreguntasController.next}" value="#{bundle.Next} #{trPreguntasController.pagination.pageSize}" rendered="#{trPreguntasController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{trPreguntasController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_idPregunta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPregunta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_idCuestionario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCuestionario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_orden}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.orden}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_activo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_fechaDeAlta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeAlta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrPreguntasTitle_idTipoDePregunta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoDePregunta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{trPreguntasController.prepareView}" value="#{bundle.ListTrPreguntasViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trPreguntasController.prepareEdit}" value="#{bundle.ListTrPreguntasEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trPreguntasController.destroy}" value="#{bundle.ListTrPreguntasDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{trPreguntasController.prepareCreate}" value="#{bundle.ListTrPreguntasCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTrPreguntasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

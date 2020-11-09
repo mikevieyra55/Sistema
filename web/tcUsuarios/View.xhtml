@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTcUsuariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_idUsuario}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.idUsuario}" title="#{bundle.ViewTcUsuariosTitle_idUsuario}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_nombres}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.nombres}" title="#{bundle.ViewTcUsuariosTitle_nombres}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_apellidos}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.apellidos}" title="#{bundle.ViewTcUsuariosTitle_apellidos}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_celular}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.celular}" title="#{bundle.ViewTcUsuariosTitle_celular}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_correo}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.correo}" title="#{bundle.ViewTcUsuariosTitle_correo}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_fechaDeNacimiento}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.fechaDeNacimiento}" title="#{bundle.ViewTcUsuariosTitle_fechaDeNacimiento}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_fechaDeAlta}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.fechaDeAlta}" title="#{bundle.ViewTcUsuariosTitle_fechaDeAlta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_activo}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.activo}" title="#{bundle.ViewTcUsuariosTitle_activo}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_usuario}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.usuario}" title="#{bundle.ViewTcUsuariosTitle_usuario}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_idPerfil}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.idPerfil}" title="#{bundle.ViewTcUsuariosTitle_idPerfil}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_domicilio}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.domicilio}" title="#{bundle.ViewTcUsuariosTitle_domicilio}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_estado}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.estado}" title="#{bundle.ViewTcUsuariosTitle_estado}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_municipio}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.municipio}" title="#{bundle.ViewTcUsuariosTitle_municipio}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_pais}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.pais}" title="#{bundle.ViewTcUsuariosTitle_pais}"/>
+                    <h:outputText value="#{bundle.ViewTcUsuariosLabel_password}"/>
+                    <h:outputText value="#{tcUsuariosController.selected.password}" title="#{bundle.ViewTcUsuariosTitle_password}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcUsuariosController.destroyAndView}" value="#{bundle.ViewTcUsuariosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTcUsuariosEditLink}"/>
+                <br />
+                <h:commandLink action="#{tcUsuariosController.prepareCreate}" value="#{bundle.ViewTcUsuariosCreateLink}" />
+                <br />
+                <h:commandLink action="#{tcUsuariosController.prepareList}" value="#{bundle.ViewTcUsuariosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTcUsuariosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

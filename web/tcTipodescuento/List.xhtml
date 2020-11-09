@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTcTipodescuentoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTcTipodescuentoEmpty}" rendered="#{tcTipodescuentoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tcTipodescuentoController.items.rowCount > 0}">
+                    <h:outputText value="#{tcTipodescuentoController.pagination.pageFirstItem + 1}..#{tcTipodescuentoController.pagination.pageLastItem + 1}/#{tcTipodescuentoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tcTipodescuentoController.previous}" value="#{bundle.Previous} #{tcTipodescuentoController.pagination.pageSize}" rendered="#{tcTipodescuentoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tcTipodescuentoController.next}" value="#{bundle.Next} #{tcTipodescuentoController.pagination.pageSize}" rendered="#{tcTipodescuentoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tcTipodescuentoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcTipodescuentoTitle_idTipoDescuento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoDescuento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcTipodescuentoTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcTipodescuentoTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcTipodescuentoTitle_fechaDeAlta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeAlta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcTipodescuentoTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcTipodescuentoTitle_activo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tcTipodescuentoController.prepareView}" value="#{bundle.ListTcTipodescuentoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tcTipodescuentoController.prepareEdit}" value="#{bundle.ListTcTipodescuentoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tcTipodescuentoController.destroy}" value="#{bundle.ListTcTipodescuentoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tcTipodescuentoController.prepareCreate}" value="#{bundle.ListTcTipodescuentoCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTcTipodescuentoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

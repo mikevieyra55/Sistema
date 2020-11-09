@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTcUsuariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcUsuariosController.selected.idUsuario}" title="#{bundle.CreateTcUsuariosTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateTcUsuariosRequiredMessage_idUsuario}"/>
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_nombres}" for="nombres" />
+                    <h:inputText id="nombres" value="#{tcUsuariosController.selected.nombres}" title="#{bundle.CreateTcUsuariosTitle_nombres}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_apellidos}" for="apellidos" />
+                    <h:inputText id="apellidos" value="#{tcUsuariosController.selected.apellidos}" title="#{bundle.CreateTcUsuariosTitle_apellidos}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_celular}" for="celular" />
+                    <h:inputText id="celular" value="#{tcUsuariosController.selected.celular}" title="#{bundle.CreateTcUsuariosTitle_celular}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_correo}" for="correo" />
+                    <h:inputText id="correo" value="#{tcUsuariosController.selected.correo}" title="#{bundle.CreateTcUsuariosTitle_correo}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_fechaDeNacimiento}" for="fechaDeNacimiento" />
+                    <h:inputText id="fechaDeNacimiento" value="#{tcUsuariosController.selected.fechaDeNacimiento}" title="#{bundle.CreateTcUsuariosTitle_fechaDeNacimiento}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcUsuariosController.selected.fechaDeAlta}" title="#{bundle.CreateTcUsuariosTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcUsuariosController.selected.activo}" title="#{bundle.CreateTcUsuariosTitle_activo}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_usuario}" for="usuario" />
+                    <h:inputText id="usuario" value="#{tcUsuariosController.selected.usuario}" title="#{bundle.CreateTcUsuariosTitle_usuario}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_idPerfil}" for="idPerfil" />
+                    <h:inputText id="idPerfil" value="#{tcUsuariosController.selected.idPerfil}" title="#{bundle.CreateTcUsuariosTitle_idPerfil}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_domicilio}" for="domicilio" />
+                    <h:inputText id="domicilio" value="#{tcUsuariosController.selected.domicilio}" title="#{bundle.CreateTcUsuariosTitle_domicilio}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{tcUsuariosController.selected.estado}" title="#{bundle.CreateTcUsuariosTitle_estado}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_municipio}" for="municipio" />
+                    <h:inputText id="municipio" value="#{tcUsuariosController.selected.municipio}" title="#{bundle.CreateTcUsuariosTitle_municipio}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_pais}" for="pais" />
+                    <h:inputText id="pais" value="#{tcUsuariosController.selected.pais}" title="#{bundle.CreateTcUsuariosTitle_pais}" />
+                    <h:outputLabel value="#{bundle.CreateTcUsuariosLabel_password}" for="password" />
+                    <h:inputText id="password" value="#{tcUsuariosController.selected.password}" title="#{bundle.CreateTcUsuariosTitle_password}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcUsuariosController.create}" value="#{bundle.CreateTcUsuariosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tcUsuariosController.prepareList}" value="#{bundle.CreateTcUsuariosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTcUsuariosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

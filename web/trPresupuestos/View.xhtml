@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTrPresupuestosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_idPresupuesto}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.idPresupuesto}" title="#{bundle.ViewTrPresupuestosTitle_idPresupuesto}"/>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_idPaciente}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.idPaciente}" title="#{bundle.ViewTrPresupuestosTitle_idPaciente}"/>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_idTratamiento}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.idTratamiento}" title="#{bundle.ViewTrPresupuestosTitle_idTratamiento}"/>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_idTipoDescuento}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.idTipoDescuento}" title="#{bundle.ViewTrPresupuestosTitle_idTipoDescuento}"/>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_precio}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.precio}" title="#{bundle.ViewTrPresupuestosTitle_precio}"/>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_fechaDeAlta}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.fechaDeAlta}" title="#{bundle.ViewTrPresupuestosTitle_fechaDeAlta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_idDoctor}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.idDoctor}" title="#{bundle.ViewTrPresupuestosTitle_idDoctor}"/>
+                    <h:outputText value="#{bundle.ViewTrPresupuestosLabel_idUsuario}"/>
+                    <h:outputText value="#{trPresupuestosController.selected.idUsuario}" title="#{bundle.ViewTrPresupuestosTitle_idUsuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trPresupuestosController.destroyAndView}" value="#{bundle.ViewTrPresupuestosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTrPresupuestosEditLink}"/>
+                <br />
+                <h:commandLink action="#{trPresupuestosController.prepareCreate}" value="#{bundle.ViewTrPresupuestosCreateLink}" />
+                <br />
+                <h:commandLink action="#{trPresupuestosController.prepareList}" value="#{bundle.ViewTrPresupuestosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTrPresupuestosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

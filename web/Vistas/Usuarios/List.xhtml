@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>        
+        <link rel="stylesheet" 
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+        crossorigin="anonymous"></script> 
+        <link href="../../../css/Dentystem.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></link>
+        <link rel="" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.dataTables.min.css"></link>
+        <script>
+            function ocultarDivAlert() {
+                $("#divAlert").hide();
+            }
+        </script>
+    </h:head>
+    <body class="container">
+        <div id="divAlert" class="#{mbUsuarios.objTransacion.classDivContainer}">            
+            <div class="#{mbUsuarios.objTransacion.classDiv}" role="alert" >
+                <strong>#{mbUsuarios.objTransacion.mensajeAlert}</strong> 
+                <button class="#{mbUsuarios.objTransacion.classButton}"  onclick="ocultarDivAlert();" />    
+            </div>
+        </div>
+        <div class="container"> 
+            <h:form id="formUsuarios">     
+                <div class="container"> 
+                    <h:commandLink                        
+                        action="#{mbUsuarios.nuevo}" 
+                        styleClass="btn btn-success btn-lg">
+                        <i class="glyphicon glyphicon-user"></i>
+                        Nuevo Usuario
+                    </h:commandLink>
+                </div>
+                <br /><br />
+                <div class="form-group-sm" >
+                    <h:dataTable id="example"
+                                 class="table table-responsive table-striped"
+                                 value="#{mbUsuarios.listaUsuarios}" 
+                                 var="item" border="0" cellpadding="2"
+                                 cellspacing="0" 
+                                 headerClass="text-center"
+                                 rowClasses="text-center"
+                                 binding="#{mbUsuarios.htmlDataTable}">                       
+                        <h:column>
+                            <f:facet name="header">
+                                Usuario
+                            </f:facet>
+                            Nombres:
+                            <h:outputText value="#{item.nombres}"/>
+                            <br />
+                            <h:outputText value="#{item.apellidos}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Ubicación:
+                            </f:facet>
+                              Domicilio:
+                            <h:outputText value="#{item.domicilio}"/>
+                            <br />
+                            C.P.
+                            <h:outputText value="#{item.codigoPostal}"/>
+                            <br />
+                            Estado:
+                            <h:outputText value="#{item.nombreEstado}"/>
+                            <br />
+                            Municipio:
+                            <h:outputText value="#{item.nombreMunicipio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Informacion De Contacto
+                            </f:facet>                          
+                            Celular:
+                            <h:outputText value="#{item.celular}"/>
+                            <br />
+                            Correo:
+                            <h:outputText value="#{item.correo}"/>
+                            <br />
+                            Fecha De Nacimiento:
+                            <h:outputText value="#{item.fechaDeNacimiento}"/>  
+                        </h:column>                      
+                        <h:column>
+                            <f:facet name="header">
+                                Datos Sistema
+                            </f:facet>
+                            Perfil:
+                            <h:outputText value="#{item.nombrePerfil}"/>
+                            <br />
+                            Usuario:
+                            <h:outputText value="#{item.usuario}"/>
+                            <br />
+                            Password:
+                            <h:outputText value="#{item.password}"/>
+                            <br />
+                            Fecha De Alta:
+                            <h:outputText value="#{item.fechaDeAlta}"/>
+                        </h:column>  
+                        <h:column>
+                            <f:facet name="header">
+                                Activar/Desactivar
+                            </f:facet>  
+                            <h:commandLink                             
+                                action="#{mbUsuarios.activar}"
+                                styleClass="#{item.classActivo}">            
+                                <i class="#{item.iconActivo}"></i>                            
+                            </h:commandLink>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Editar"/>
+                            </f:facet>                           
+                            <h:commandLink style="alignment-adjust: central"                          
+                                           action="#{mbUsuarios.editar}"
+                                           styleClass="btn btn-default btn-sm">          
+                                <i class="glyphicon glyphicon-edit btn-lg"></i>                            
+                            </h:commandLink>
+                        </h:column>
+                    </h:dataTable> 
+
+                </div>
+            </h:form>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script> 
+
+        <script>
+
+                    $(document).ready(function () {
+                        var table = $('#formUsuarios\\:example').DataTable({
+                            orderCellsTop: true,
+                            fixedHeader: true
+                        });
+
+                    });
+        </script>
+    </body>
+</html>

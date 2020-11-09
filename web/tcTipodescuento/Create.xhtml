@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTcTipodescuentoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTcTipodescuentoLabel_idTipoDescuento}" for="idTipoDescuento" />
+                    <h:inputText id="idTipoDescuento" value="#{tcTipodescuentoController.selected.idTipoDescuento}" title="#{bundle.CreateTcTipodescuentoTitle_idTipoDescuento}" required="true" requiredMessage="#{bundle.CreateTcTipodescuentoRequiredMessage_idTipoDescuento}"/>
+                    <h:outputLabel value="#{bundle.CreateTcTipodescuentoLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tcTipodescuentoController.selected.nombre}" title="#{bundle.CreateTcTipodescuentoTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.CreateTcTipodescuentoLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tcTipodescuentoController.selected.descripcion}" title="#{bundle.CreateTcTipodescuentoTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.CreateTcTipodescuentoLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcTipodescuentoController.selected.fechaDeAlta}" title="#{bundle.CreateTcTipodescuentoTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTcTipodescuentoLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcTipodescuentoController.selected.idUsuario}" title="#{bundle.CreateTcTipodescuentoTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.CreateTcTipodescuentoLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcTipodescuentoController.selected.activo}" title="#{bundle.CreateTcTipodescuentoTitle_activo}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcTipodescuentoController.create}" value="#{bundle.CreateTcTipodescuentoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tcTipodescuentoController.prepareList}" value="#{bundle.CreateTcTipodescuentoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTcTipodescuentoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

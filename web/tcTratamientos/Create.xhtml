@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTcTratamientosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTcTratamientosLabel_idTratamiento}" for="idTratamiento" />
+                    <h:inputText id="idTratamiento" value="#{tcTratamientosController.selected.idTratamiento}" title="#{bundle.CreateTcTratamientosTitle_idTratamiento}" required="true" requiredMessage="#{bundle.CreateTcTratamientosRequiredMessage_idTratamiento}"/>
+                    <h:outputLabel value="#{bundle.CreateTcTratamientosLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tcTratamientosController.selected.descripcion}" title="#{bundle.CreateTcTratamientosTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.CreateTcTratamientosLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcTratamientosController.selected.activo}" title="#{bundle.CreateTcTratamientosTitle_activo}" />
+                    <h:outputLabel value="#{bundle.CreateTcTratamientosLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcTratamientosController.selected.fechaDeAlta}" title="#{bundle.CreateTcTratamientosTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTcTratamientosLabel_precio}" for="precio" />
+                    <h:inputText id="precio" value="#{tcTratamientosController.selected.precio}" title="#{bundle.CreateTcTratamientosTitle_precio}" />
+                    <h:outputLabel value="#{bundle.CreateTcTratamientosLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcTratamientosController.selected.idUsuario}" title="#{bundle.CreateTcTratamientosTitle_idUsuario}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcTratamientosController.create}" value="#{bundle.CreateTcTratamientosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tcTratamientosController.prepareList}" value="#{bundle.CreateTcTratamientosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTcTratamientosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTcEstadosdecitaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTcEstadosdecitaLabel_idEstadoDeCita}" for="idEstadoDeCita" />
+                    <h:inputText id="idEstadoDeCita" value="#{tcEstadosdecitaController.selected.idEstadoDeCita}" title="#{bundle.EditTcEstadosdecitaTitle_idEstadoDeCita}" required="true" requiredMessage="#{bundle.EditTcEstadosdecitaRequiredMessage_idEstadoDeCita}"/>
+                    <h:outputLabel value="#{bundle.EditTcEstadosdecitaLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tcEstadosdecitaController.selected.nombre}" title="#{bundle.EditTcEstadosdecitaTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.EditTcEstadosdecitaLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tcEstadosdecitaController.selected.descripcion}" title="#{bundle.EditTcEstadosdecitaTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.EditTcEstadosdecitaLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcEstadosdecitaController.selected.activo}" title="#{bundle.EditTcEstadosdecitaTitle_activo}" />
+                    <h:outputLabel value="#{bundle.EditTcEstadosdecitaLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcEstadosdecitaController.selected.idUsuario}" title="#{bundle.EditTcEstadosdecitaTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.EditTcEstadosdecitaLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcEstadosdecitaController.selected.fechaDeAlta}" title="#{bundle.EditTcEstadosdecitaTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                </h:panelGrid>
+                <h:commandLink action="#{tcEstadosdecitaController.update}" value="#{bundle.EditTcEstadosdecitaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTcEstadosdecitaViewLink}"/>
+                <br />
+                <h:commandLink action="#{tcEstadosdecitaController.prepareList}" value="#{bundle.EditTcEstadosdecitaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTcEstadosdecitaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

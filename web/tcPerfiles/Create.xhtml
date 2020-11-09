@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTcPerfilesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTcPerfilesLabel_idPerfil}" for="idPerfil" />
+                    <h:inputText id="idPerfil" value="#{tcPerfilesController.selected.idPerfil}" title="#{bundle.CreateTcPerfilesTitle_idPerfil}" required="true" requiredMessage="#{bundle.CreateTcPerfilesRequiredMessage_idPerfil}"/>
+                    <h:outputLabel value="#{bundle.CreateTcPerfilesLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tcPerfilesController.selected.nombre}" title="#{bundle.CreateTcPerfilesTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.CreateTcPerfilesLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tcPerfilesController.selected.descripcion}" title="#{bundle.CreateTcPerfilesTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.CreateTcPerfilesLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcPerfilesController.selected.activo}" title="#{bundle.CreateTcPerfilesTitle_activo}" />
+                    <h:outputLabel value="#{bundle.CreateTcPerfilesLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcPerfilesController.selected.fechaDeAlta}" title="#{bundle.CreateTcPerfilesTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateTcPerfilesLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcPerfilesController.selected.idUsuario}" title="#{bundle.CreateTcPerfilesTitle_idUsuario}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcPerfilesController.create}" value="#{bundle.CreateTcPerfilesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tcPerfilesController.prepareList}" value="#{bundle.CreateTcPerfilesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTcPerfilesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

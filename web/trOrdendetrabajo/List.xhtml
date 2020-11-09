@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTrOrdendetrabajoEmpty}" rendered="#{trOrdendetrabajoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{trOrdendetrabajoController.items.rowCount > 0}">
+                    <h:outputText value="#{trOrdendetrabajoController.pagination.pageFirstItem + 1}..#{trOrdendetrabajoController.pagination.pageLastItem + 1}/#{trOrdendetrabajoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{trOrdendetrabajoController.previous}" value="#{bundle.Previous} #{trOrdendetrabajoController.pagination.pageSize}" rendered="#{trOrdendetrabajoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{trOrdendetrabajoController.next}" value="#{bundle.Next} #{trOrdendetrabajoController.pagination.pageSize}" rendered="#{trOrdendetrabajoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{trOrdendetrabajoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idOrdenDeTrabajo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idOrdenDeTrabajo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idPaciente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPaciente}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idTratamiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTratamiento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idTipoDescuento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoDescuento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_precio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_fechaDeAlta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeAlta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idDoctor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDoctor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTrOrdendetrabajoTitle_idCompra}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCompra}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{trOrdendetrabajoController.prepareView}" value="#{bundle.ListTrOrdendetrabajoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trOrdendetrabajoController.prepareEdit}" value="#{bundle.ListTrOrdendetrabajoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{trOrdendetrabajoController.destroy}" value="#{bundle.ListTrOrdendetrabajoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{trOrdendetrabajoController.prepareCreate}" value="#{bundle.ListTrOrdendetrabajoCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTrOrdendetrabajoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

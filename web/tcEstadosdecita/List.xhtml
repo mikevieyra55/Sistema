@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTcEstadosdecitaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTcEstadosdecitaEmpty}" rendered="#{tcEstadosdecitaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tcEstadosdecitaController.items.rowCount > 0}">
+                    <h:outputText value="#{tcEstadosdecitaController.pagination.pageFirstItem + 1}..#{tcEstadosdecitaController.pagination.pageLastItem + 1}/#{tcEstadosdecitaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tcEstadosdecitaController.previous}" value="#{bundle.Previous} #{tcEstadosdecitaController.pagination.pageSize}" rendered="#{tcEstadosdecitaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tcEstadosdecitaController.next}" value="#{bundle.Next} #{tcEstadosdecitaController.pagination.pageSize}" rendered="#{tcEstadosdecitaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tcEstadosdecitaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcEstadosdecitaTitle_idEstadoDeCita}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEstadoDeCita}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcEstadosdecitaTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcEstadosdecitaTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcEstadosdecitaTitle_activo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcEstadosdecitaTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcEstadosdecitaTitle_fechaDeAlta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeAlta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tcEstadosdecitaController.prepareView}" value="#{bundle.ListTcEstadosdecitaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tcEstadosdecitaController.prepareEdit}" value="#{bundle.ListTcEstadosdecitaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tcEstadosdecitaController.destroy}" value="#{bundle.ListTcEstadosdecitaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tcEstadosdecitaController.prepareCreate}" value="#{bundle.ListTcEstadosdecitaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTcEstadosdecitaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTcTiposdepreguntaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTcTiposdepreguntaLabel_idTipoDePregunta}" for="idTipoDePregunta" />
+                    <h:inputText id="idTipoDePregunta" value="#{tcTiposdepreguntaController.selected.idTipoDePregunta}" title="#{bundle.EditTcTiposdepreguntaTitle_idTipoDePregunta}" required="true" requiredMessage="#{bundle.EditTcTiposdepreguntaRequiredMessage_idTipoDePregunta}"/>
+                    <h:outputLabel value="#{bundle.EditTcTiposdepreguntaLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tcTiposdepreguntaController.selected.descripcion}" title="#{bundle.EditTcTiposdepreguntaTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.EditTcTiposdepreguntaLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcTiposdepreguntaController.selected.activo}" title="#{bundle.EditTcTiposdepreguntaTitle_activo}" />
+                    <h:outputLabel value="#{bundle.EditTcTiposdepreguntaLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcTiposdepreguntaController.selected.fechaDeAlta}" title="#{bundle.EditTcTiposdepreguntaTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTcTiposdepreguntaLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcTiposdepreguntaController.selected.idUsuario}" title="#{bundle.EditTcTiposdepreguntaTitle_idUsuario}" />
+                </h:panelGrid>
+                <h:commandLink action="#{tcTiposdepreguntaController.update}" value="#{bundle.EditTcTiposdepreguntaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTcTiposdepreguntaViewLink}"/>
+                <br />
+                <h:commandLink action="#{tcTiposdepreguntaController.prepareList}" value="#{bundle.EditTcTiposdepreguntaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTcTiposdepreguntaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

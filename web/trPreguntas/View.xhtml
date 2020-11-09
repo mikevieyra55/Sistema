@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTrPreguntasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_idPregunta}"/>
+                    <h:outputText value="#{trPreguntasController.selected.idPregunta}" title="#{bundle.ViewTrPreguntasTitle_idPregunta}"/>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_descripcion}"/>
+                    <h:outputText value="#{trPreguntasController.selected.descripcion}" title="#{bundle.ViewTrPreguntasTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_idCuestionario}"/>
+                    <h:outputText value="#{trPreguntasController.selected.idCuestionario}" title="#{bundle.ViewTrPreguntasTitle_idCuestionario}"/>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_orden}"/>
+                    <h:outputText value="#{trPreguntasController.selected.orden}" title="#{bundle.ViewTrPreguntasTitle_orden}"/>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_activo}"/>
+                    <h:outputText value="#{trPreguntasController.selected.activo}" title="#{bundle.ViewTrPreguntasTitle_activo}"/>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_fechaDeAlta}"/>
+                    <h:outputText value="#{trPreguntasController.selected.fechaDeAlta}" title="#{bundle.ViewTrPreguntasTitle_fechaDeAlta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_idUsuario}"/>
+                    <h:outputText value="#{trPreguntasController.selected.idUsuario}" title="#{bundle.ViewTrPreguntasTitle_idUsuario}"/>
+                    <h:outputText value="#{bundle.ViewTrPreguntasLabel_idTipoDePregunta}"/>
+                    <h:outputText value="#{trPreguntasController.selected.idTipoDePregunta}" title="#{bundle.ViewTrPreguntasTitle_idTipoDePregunta}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trPreguntasController.destroyAndView}" value="#{bundle.ViewTrPreguntasDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTrPreguntasEditLink}"/>
+                <br />
+                <h:commandLink action="#{trPreguntasController.prepareCreate}" value="#{bundle.ViewTrPreguntasCreateLink}" />
+                <br />
+                <h:commandLink action="#{trPreguntasController.prepareList}" value="#{bundle.ViewTrPreguntasShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTrPreguntasIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

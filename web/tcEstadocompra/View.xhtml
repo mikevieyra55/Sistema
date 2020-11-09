@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTcEstadocompraTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTcEstadocompraLabel_idEstadoCompra}"/>
+                    <h:outputText value="#{tcEstadocompraController.selected.idEstadoCompra}" title="#{bundle.ViewTcEstadocompraTitle_idEstadoCompra}"/>
+                    <h:outputText value="#{bundle.ViewTcEstadocompraLabel_nombre}"/>
+                    <h:outputText value="#{tcEstadocompraController.selected.nombre}" title="#{bundle.ViewTcEstadocompraTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewTcEstadocompraLabel_descripcion}"/>
+                    <h:outputText value="#{tcEstadocompraController.selected.descripcion}" title="#{bundle.ViewTcEstadocompraTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewTcEstadocompraLabel_activo}"/>
+                    <h:outputText value="#{tcEstadocompraController.selected.activo}" title="#{bundle.ViewTcEstadocompraTitle_activo}"/>
+                    <h:outputText value="#{bundle.ViewTcEstadocompraLabel_fechaDeAlta}"/>
+                    <h:outputText value="#{tcEstadocompraController.selected.fechaDeAlta}" title="#{bundle.ViewTcEstadocompraTitle_fechaDeAlta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTcEstadocompraLabel_idUsuario}"/>
+                    <h:outputText value="#{tcEstadocompraController.selected.idUsuario}" title="#{bundle.ViewTcEstadocompraTitle_idUsuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcEstadocompraController.destroyAndView}" value="#{bundle.ViewTcEstadocompraDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTcEstadocompraEditLink}"/>
+                <br />
+                <h:commandLink action="#{tcEstadocompraController.prepareCreate}" value="#{bundle.ViewTcEstadocompraCreateLink}" />
+                <br />
+                <h:commandLink action="#{tcEstadocompraController.prepareList}" value="#{bundle.ViewTcEstadocompraShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTcEstadocompraIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

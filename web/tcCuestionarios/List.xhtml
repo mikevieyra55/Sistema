@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTcCuestionariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTcCuestionariosEmpty}" rendered="#{tcCuestionariosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tcCuestionariosController.items.rowCount > 0}">
+                    <h:outputText value="#{tcCuestionariosController.pagination.pageFirstItem + 1}..#{tcCuestionariosController.pagination.pageLastItem + 1}/#{tcCuestionariosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tcCuestionariosController.previous}" value="#{bundle.Previous} #{tcCuestionariosController.pagination.pageSize}" rendered="#{tcCuestionariosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tcCuestionariosController.next}" value="#{bundle.Next} #{tcCuestionariosController.pagination.pageSize}" rendered="#{tcCuestionariosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tcCuestionariosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcCuestionariosTitle_idCuestionario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCuestionario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcCuestionariosTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcCuestionariosTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcCuestionariosTitle_fechaDeAlta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaDeAlta}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTcCuestionariosTitle_activo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tcCuestionariosController.prepareView}" value="#{bundle.ListTcCuestionariosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tcCuestionariosController.prepareEdit}" value="#{bundle.ListTcCuestionariosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tcCuestionariosController.destroy}" value="#{bundle.ListTcCuestionariosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tcCuestionariosController.prepareCreate}" value="#{bundle.ListTcCuestionariosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTcCuestionariosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

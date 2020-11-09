@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTcCuestionariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTcCuestionariosLabel_idCuestionario}" for="idCuestionario" />
+                    <h:inputText id="idCuestionario" value="#{tcCuestionariosController.selected.idCuestionario}" title="#{bundle.EditTcCuestionariosTitle_idCuestionario}" required="true" requiredMessage="#{bundle.EditTcCuestionariosRequiredMessage_idCuestionario}"/>
+                    <h:outputLabel value="#{bundle.EditTcCuestionariosLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tcCuestionariosController.selected.nombre}" title="#{bundle.EditTcCuestionariosTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.EditTcCuestionariosLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tcCuestionariosController.selected.descripcion}" title="#{bundle.EditTcCuestionariosTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.EditTcCuestionariosLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcCuestionariosController.selected.fechaDeAlta}" title="#{bundle.EditTcCuestionariosTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTcCuestionariosLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcCuestionariosController.selected.activo}" title="#{bundle.EditTcCuestionariosTitle_activo}" />
+                </h:panelGrid>
+                <h:commandLink action="#{tcCuestionariosController.update}" value="#{bundle.EditTcCuestionariosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTcCuestionariosViewLink}"/>
+                <br />
+                <h:commandLink action="#{tcCuestionariosController.prepareList}" value="#{bundle.EditTcCuestionariosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTcCuestionariosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

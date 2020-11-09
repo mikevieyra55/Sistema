@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>          
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+                integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" 
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" 
+        crossorigin="anonymous"></script>        
+        <!-- DatePicker JavaScript & CSS -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />      
+        <link href="../../../css/Dentystem.css" type="text/css" rel="stylesheet" />
+        <script type = "text/javascript">
+            $(document).ready(function () {
+                $(".datepicker").datepicker({
+                    dateFormat: "yy-mm-dd"
+                });
+            });
+
+        </script>
+    </h:head> 
+    <h:body>
+        <div class="container">  
+            <h:form id="editUsuario" >    
+                <div class="container">                   
+                    <div class="hidden form-group-sm">
+                        <h:outputLabel value="#{bundle.EditTcUsuariosLabel_idUsuario}" for="idUsuario" />
+                        <h:inputText class="form-control" id="idUsuario" value="#{mbUsuarios.usuarioSeleccionado.idUsuario}" 
+                                     title="#{bundle.EditTcUsuariosTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditTcUsuariosRequiredMessage_idUsuario}"/>
+                    </div>
+                    <div class="form-group-sm">
+                        <h:outputLabel value="#{bundle.EditTcUsuariosLabel_nombres}" for="nombres" />
+                        <h:inputText class="form-control" id="nombres" value="#{mbUsuarios.usuarioSeleccionado.nombres}" 
+                                     title="#{bundle.EditTcUsuariosTitle_nombres}" />
+                    </div>
+                    <div class="form-group-sm">
+                        <h:outputLabel value="#{bundle.EditTcUsuariosLabel_apellidos}" for="apellidos" />
+                        <h:inputText class="form-control" id="apellidos" value="#{mbUsuarios.usuarioSeleccionado.apellidos}"
+                                     title="#{bundle.EditTcUsuariosTitle_apellidos}" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <h:outputLabel value="#{bundle.CreateTcUsuariosTitle_codigoPostal}" for="codigoPostal" />
+                            <h:inputText class="form-control" id="codigoPostal"
+                                         value="#{mbUsuarios.usuarioSeleccionado.codigoPostal}"
+                                         title="#{bundle.CreateTcUsuariosTitle_codigoPostal}" />
+                        </div> 
+                        <div class="form-group col-md-6">
+                            <h:outputLabel value="#{bundle.EditTcUsuariosLabel_domicilio}" for="domicilio" />
+                            <h:inputText class="form-control" id="domicilio" value="#{mbUsuarios.usuarioSeleccionado.domicilio}"
+                                         title="#{bundle.EditTcUsuariosTitle_domicilio}" />
+                        </div> 
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <h:outputLabel value="#{bundle.EditTcUsuariosLabel_fechaDeNacimiento}" for="fechaDeNacimiento" />
+                            <h:inputText class="form-control datepicker" id="fechaDeNacimiento" 
+                                         value="#{mbUsuarios.usuarioSeleccionado.fechaDeNacimiento}"
+                                         title="#{bundle.EditTcUsuariosTitle_fechaDeNacimiento}" >       
+                                 <f:convertDateTime pattern="yyyy-MM-dd"/> 
+                            </h:inputText>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h:outputLabel value="#{bundle.EditTcUsuariosLabel_celular}" for="celular" />
+                            <h:inputText  class="form-control" id="celular" value="#{mbUsuarios.usuarioSeleccionado.celular}" 
+                                          title="#{bundle.EditTcUsuariosTitle_celular}" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <h:outputLabel value="#{bundle.EditTcUsuariosLabel_correo}" for="correo" />
+                            <h:inputText class="form-control" id="correo" value="#{mbUsuarios.usuarioSeleccionado.correo}" 
+                                         title="#{bundle.EditTcUsuariosTitle_correo}" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">   
+                            <h:outputLabel value="#{bundle.EditTcUsuariosLabel_usuario}" for="usuario" />
+                            <h:inputText class="form-control" id="usuario" value="#{mbUsuarios.usuarioSeleccionado.usuario}" title="#{bundle.EditTcUsuariosTitle_usuario}" />
+                        </div>   
+                        <div class="form-group col-md-6">
+                            <h:outputLabel value="#{bundle.EditTcUsuariosLabel_password}" for="password" />
+                            <h:inputText class="form-control" id="password" value="#{mbUsuarios.usuarioSeleccionado.password}" title="#{bundle.EditTcUsuariosTitle_password}" />
+                        </div>  
+                    </div>
+                    <div class="form-group-sm">                                            
+                        <h:outputLabel value="Perfil:"  />
+                        <h:selectOneMenu class="form-control" value="#{mbUsuarios.usuarioSeleccionado.idPerfil}">                                
+                            <f:selectItems value="#{mbUsuarios.listaPerfiles}" var="perfiles" />  
+                        </h:selectOneMenu>
+                    </div> 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <h:outputLabel value="Estado:"  />
+                            <h:selectOneMenu id="estado" 
+                                             class="form-control" 
+                                             binding="#{mbUsuarios.uiSelectEstado}"
+                                             immediate="true"
+                                             value="#{mbUsuarios.usuarioSeleccionado.idEstado}"                                            
+                                             required="true" requiredMessage="#{bundle.RequiredFieldDentystem}" > 
+                                <f:selectItems value="#{mbUsuarios.listaEstados}" />  
+                                <f:ajax listener="#{mbUsuarios.actualizaCB}" render="municipio" />
+                            </h:selectOneMenu>   
+                        </div> 
+                        <div class="form-group col-md-6">
+                            <h:outputLabel  value="Municipio:"  />
+                            <h:selectOneMenu id="municipio"
+                                             class="form-control"
+                                             binding="#{mbUsuarios.uiSelectMunicipio}"
+                                             immediate="true"
+                                             value="#{mbUsuarios.usuarioSeleccionado.idMunicipio}"                                            
+                                             required="true" requiredMessage="#{bundle.RequiredFieldDentystem}" >   
+                                <f:selectItems value="#{mbUsuarios.listaMunicipios}"/>  
+                            </h:selectOneMenu>  
+                        </div> 
+                    </div>                      
+                    <br />
+                    <div align="center">
+                        <div class="form-group-sm" align="center">
+                            <h:outputLabel value="Fecha de creación:" />
+                            <br />
+                            #{mbUsuarios.usuarioSeleccionado.fechaDeAlta}
+                        </div>                                          
+                    </div>
+                    <br />                   
+                    <div class="form-group-sm" align="center">
+                        <h:commandButton class="btn-primary btn-lg" action="#{mbUsuarios.actualizar}" value="Actualizar"/>                
+                    </div> 
+                    <br />
+                    <div class="form-group-sm">
+                        <a class="btn-default btn-lg"  href="List.xhtml">Regresar</a>
+                    </div>
+                </div>
+            </h:form>   
+
+        </div>
+    </h:body>
+</html>

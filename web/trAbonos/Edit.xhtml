@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTrAbonosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTrAbonosLabel_idAbono}" for="idAbono" />
+                    <h:inputText id="idAbono" value="#{trAbonosController.selected.idAbono}" title="#{bundle.EditTrAbonosTitle_idAbono}" required="true" requiredMessage="#{bundle.EditTrAbonosRequiredMessage_idAbono}"/>
+                    <h:outputLabel value="#{bundle.EditTrAbonosLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{trAbonosController.selected.fechaDeAlta}" title="#{bundle.EditTrAbonosTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTrAbonosLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{trAbonosController.selected.cantidad}" title="#{bundle.EditTrAbonosTitle_cantidad}" />
+                    <h:outputLabel value="#{bundle.EditTrAbonosLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{trAbonosController.selected.idUsuario}" title="#{bundle.EditTrAbonosTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.EditTrAbonosLabel_idCompra}" for="idCompra" />
+                    <h:inputText id="idCompra" value="#{trAbonosController.selected.idCompra}" title="#{bundle.EditTrAbonosTitle_idCompra}" />
+                    <h:outputLabel value="#{bundle.EditTrAbonosLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{trAbonosController.selected.activo}" title="#{bundle.EditTrAbonosTitle_activo}" />
+                </h:panelGrid>
+                <h:commandLink action="#{trAbonosController.update}" value="#{bundle.EditTrAbonosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTrAbonosViewLink}"/>
+                <br />
+                <h:commandLink action="#{trAbonosController.prepareList}" value="#{bundle.EditTrAbonosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTrAbonosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

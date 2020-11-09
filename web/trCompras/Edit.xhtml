@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTrComprasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTrComprasLabel_idCompra}" for="idCompra" />
+                    <h:inputText id="idCompra" value="#{trComprasController.selected.idCompra}" title="#{bundle.EditTrComprasTitle_idCompra}" required="true" requiredMessage="#{bundle.EditTrComprasRequiredMessage_idCompra}"/>
+                    <h:outputLabel value="#{bundle.EditTrComprasLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{trComprasController.selected.fechaDeAlta}" title="#{bundle.EditTrComprasTitle_fechaDeAlta}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditTrComprasLabel_total}" for="total" />
+                    <h:inputText id="total" value="#{trComprasController.selected.total}" title="#{bundle.EditTrComprasTitle_total}" />
+                    <h:outputLabel value="#{bundle.EditTrComprasLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{trComprasController.selected.idUsuario}" title="#{bundle.EditTrComprasTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.EditTrComprasLabel_idDoctor}" for="idDoctor" />
+                    <h:inputText id="idDoctor" value="#{trComprasController.selected.idDoctor}" title="#{bundle.EditTrComprasTitle_idDoctor}" />
+                    <h:outputLabel value="#{bundle.EditTrComprasLabel_idEstadoCompra}" for="idEstadoCompra" />
+                    <h:inputText id="idEstadoCompra" value="#{trComprasController.selected.idEstadoCompra}" title="#{bundle.EditTrComprasTitle_idEstadoCompra}" />
+                </h:panelGrid>
+                <h:commandLink action="#{trComprasController.update}" value="#{bundle.EditTrComprasSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTrComprasViewLink}"/>
+                <br />
+                <h:commandLink action="#{trComprasController.prepareList}" value="#{bundle.EditTrComprasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTrComprasIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

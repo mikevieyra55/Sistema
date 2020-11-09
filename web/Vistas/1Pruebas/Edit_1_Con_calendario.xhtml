@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+     >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>               
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <link href="css/Dentystem.css" rel="stylesheet" type="text/css"/>
+        <!-- DatePicker JavaScript & CSS -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
+        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />        
+        <script type = "text/javascript">
+            $(document).ready(function () {
+                $(".datepicker").datepicker({
+                    dateFormat: "yy-mm-dd"
+                });
+            });
+
+        </script>
+    </head> 
+    <body>
+        <h:form id="editMenu" >    
+            <div class="form-group col-md-6">
+                <div class="form-group">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_idMenu}" for="menuCB" />
+                    <h:selectOneMenu class="form-control" id="menuCB" value="#{mbMenus.menuSeleccionado.idMenu}">
+                        <f:selectItem itemLabel="" itemValue="0"/> 
+                        <f:selectItems value="#{mbMenus.listaMenusPadres}" var="menu" 
+                                       itemValue="#{menu.idMenu}" itemLabel="#{menu.nombre}" />                
+                    </h:selectOneMenu>
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_idMenu}" for="idMenu" />
+                    <h:inputText class="form-control" id="idMenu" value="#{mbMenus.menuSeleccionado.idMenu}"
+                                 title="#{bundle.EditTcMenuTitle_idMenu}" required="true" 
+                                 requiredMessage="#{bundle.EditTcMenuRequiredMessage_idMenu}"/>
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_nombre}" for="nombre" />
+                    <h:inputText class="form-control" id="nombre" value="#{mbMenus.menuSeleccionado.nombre}" 
+                                 title="#{bundle.EditTcMenuTitle_nombre}" />
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_controlador}" for="controlador" />
+                    <h:inputText class="form-control" id="controlador" value="#{mbMenus.menuSeleccionado.controlador}" 
+                                 title="#{bundle.EditTcMenuTitle_controlador}" />
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_activo}" for="activo" />
+                    <h:inputText class="form-control" id="activo" value="#{mbMenus.menuSeleccionado.activo}"
+                                 title="#{bundle.EditTcMenuTitle_activo}" />
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_fechaDeAlta}" for="fechaDeAlta"/>                       
+                    <h:inputText class="form-control datepicker" id="fechaDeAlta"  
+                                 value="#{mbMenus.menuSeleccionado.fechaDeAlta}" title="#{bundle.EditTcMenuTitle_fechaDeAlta}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/> 
+                    </h:inputText>
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText class="form-control" id="idUsuario" value="#{mbMenus.menuSeleccionado.idUsuario}"
+                                 title="#{bundle.EditTcMenuTitle_idUsuario}" />
+                </div>
+                <div class="form-group-sm">
+                    <h:outputLabel value="#{bundle.EditTcMenuLabel_idPadre}" for="idPadre" />
+                    <h:inputText class="form-control" id="idPadre" value="#{mbMenus.menuSeleccionado.idPadre}"
+                                 title="#{bundle.EditTcMenuTitle_idPadre}" />
+                </div>
+                <br />
+                <div align="center">
+                    <div class="form-group col-md-6" align="center">
+                        <h:outputLabel value="Fecha de creación:" />
+                        <h:outputLabel class="form-control" value="#{mbMenus.menuSeleccionado.fechaDeAlta}" />
+                    </div>
+                    <div class="form-group col-md-6" align="center">
+                        <h:outputLabel value="Creado por:" />
+                        <h:outputLabel class="form-control" value="#{mbMenus.menuSeleccionado.nombreUsuario}" />
+                    </div>                
+                </div>
+                <br />
+                <div class="form-group-sm" align="center">
+                    <h:commandButton class="btn-primary btn-lg" action="#{mbMenus.Actualizar}" value="Actualizar"/>                
+                </div>
+                <br />
+                <div class="form-group-sm">                
+                    <h:commandButton class="btn-default btn-lg" action="#{mbMenus.Regresar}" value="Regresar"/> 
+                </div>
+            </div>
+        </h:form>   
+    </body>
+</html>

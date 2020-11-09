@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTrPermisosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTrPermisosLabel_idPermiso}" for="idPermiso" />
+                    <h:inputText id="idPermiso" value="#{trPermisosController.selected.idPermiso}" title="#{bundle.CreateTrPermisosTitle_idPermiso}" required="true" requiredMessage="#{bundle.CreateTrPermisosRequiredMessage_idPermiso}"/>
+                    <h:outputLabel value="#{bundle.CreateTrPermisosLabel_idPerfil}" for="idPerfil" />
+                    <h:inputText id="idPerfil" value="#{trPermisosController.selected.idPerfil}" title="#{bundle.CreateTrPermisosTitle_idPerfil}" />
+                    <h:outputLabel value="#{bundle.CreateTrPermisosLabel_idMenu}" for="idMenu" />
+                    <h:inputText id="idMenu" value="#{trPermisosController.selected.idMenu}" title="#{bundle.CreateTrPermisosTitle_idMenu}" />
+                    <h:outputLabel value="#{bundle.CreateTrPermisosLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{trPermisosController.selected.fechaDeAlta}" title="#{bundle.CreateTrPermisosTitle_fechaDeAlta}" />
+                    <h:outputLabel value="#{bundle.CreateTrPermisosLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{trPermisosController.selected.idUsuario}" title="#{bundle.CreateTrPermisosTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.CreateTrPermisosLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{trPermisosController.selected.activo}" title="#{bundle.CreateTrPermisosTitle_activo}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trPermisosController.create}" value="#{bundle.CreateTrPermisosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{trPermisosController.prepareList}" value="#{bundle.CreateTrPermisosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTrPermisosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

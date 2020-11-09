@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTrCitasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_idCita}"/>
+                    <h:outputText value="#{trCitasController.selected.idCita}" title="#{bundle.ViewTrCitasTitle_idCita}"/>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_fechaDeAlta}"/>
+                    <h:outputText value="#{trCitasController.selected.fechaDeAlta}" title="#{bundle.ViewTrCitasTitle_fechaDeAlta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_fechaDeCita}"/>
+                    <h:outputText value="#{trCitasController.selected.fechaDeCita}" title="#{bundle.ViewTrCitasTitle_fechaDeCita}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_horaDeCita}"/>
+                    <h:outputText value="#{trCitasController.selected.horaDeCita}" title="#{bundle.ViewTrCitasTitle_horaDeCita}"/>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_activo}"/>
+                    <h:outputText value="#{trCitasController.selected.activo}" title="#{bundle.ViewTrCitasTitle_activo}"/>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_idPaciente}"/>
+                    <h:outputText value="#{trCitasController.selected.idPaciente}" title="#{bundle.ViewTrCitasTitle_idPaciente}"/>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_idUsuario}"/>
+                    <h:outputText value="#{trCitasController.selected.idUsuario}" title="#{bundle.ViewTrCitasTitle_idUsuario}"/>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_idEstadoDeCita}"/>
+                    <h:outputText value="#{trCitasController.selected.idEstadoDeCita}" title="#{bundle.ViewTrCitasTitle_idEstadoDeCita}"/>
+                    <h:outputText value="#{bundle.ViewTrCitasLabel_idDoctor}"/>
+                    <h:outputText value="#{trCitasController.selected.idDoctor}" title="#{bundle.ViewTrCitasTitle_idDoctor}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{trCitasController.destroyAndView}" value="#{bundle.ViewTrCitasDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTrCitasEditLink}"/>
+                <br />
+                <h:commandLink action="#{trCitasController.prepareCreate}" value="#{bundle.ViewTrCitasCreateLink}" />
+                <br />
+                <h:commandLink action="#{trCitasController.prepareList}" value="#{bundle.ViewTrCitasShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTrCitasIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        </f:facet>
+        <title>Administrador de Solicitudes</title>
+        <link href="#{facesContext.externalContext.requestContextPath}/Librerias/Estilos/nominaPrime.css" type="text/css" rel="stylesheet"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/Librerias/Estilos/siaexplorer.css" type="text/css" rel="stylesheet"/>   
+
+    </h:head>    
+    <h:body >
+        <p:panel  id="panelGeneral"  style="margin-bottom:10px; align-items:center ; width: 100% "  >  
+            <table cellSpacing="1" cellPadding="1" align="center" border="0" width="650px">                        
+                <tr>
+                    <td>
+                <h:form  id="datos" >                  
+                    <p:panel  header="Administrador de solicitudes" style="margin-bottom:10px; align-items:center; width: 100%;"  >  
+                        <p:panelGrid style="margin-top: 20px; width: 100%" >                                                       
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">Trámites: </p:column>
+                                <p:column >
+                                    <p:selectOneMenu  style="cajaTexto"  value="#{beanAdminisSolicitud.dtoServicio.idServicio}" >  
+                                        <f:selectItem itemLabel="" itemValue="" />
+                                        <f:selectItems value="#{beanAdminisSolicitud.servicios}"  var="servicio" 
+                                                       itemLabel="#{servicio.descripcion}" itemValue="#{servicio.idServicio}"   />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">Estatus de la solicitud: </p:column>
+                                <p:column >
+                                    <p:selectOneMenu  style="cajaTexto"  value="#{beanAdminisSolicitud.dtoEstatus.estatus}" >  
+                                        <f:selectItem itemLabel=" " itemValue="" />
+                                        <f:selectItems value="#{beanAdminisSolicitud.estatus}"  var="estatus" 
+                                                       itemLabel="#{estatus.descripcion}" itemValue="#{estatus.estatus}"   />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">Periodo a mostrar: </p:column>
+                                <p:column >
+                                    <p:calendar value="#{beanAdminisSolicitud.fechaDesde}" pattern="dd/MM/yyyy" mode="popup" showOn="button" />
+                                    <p:calendar value="#{beanAdminisSolicitud.fechaHasta}" pattern="dd/MM/yyyy" mode="popup" showOn="button" />                                
+                                </p:column>
+                            </p:row>    
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">Nombre: </p:column>
+                                <p:column ><p:inputText style="text-transform:uppercase" value="#{beanAdminisSolicitud.nombreBuscar}" /></p:column>         
+                            </p:row>
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">R.F.C. - C.U.R.P.: </p:column>
+                                <p:column ><p:inputText style="text-transform:uppercase" value="#{beanAdminisSolicitud.rfc_curpBuscar}" /></p:column>  
+                            </p:row>           
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">Tipo de Contratación: </p:column>
+                                <p:column >
+                                    <p:selectOneMenu  style="cajaTexto"  value="#{beanAdminisSolicitud.CBTipoContrata}" >  
+                                        <f:selectItem itemLabel="" itemValue="" />
+                                        <f:selectItem itemLabel="Presupuestal" itemValue="Presupuestal" />
+                                        <f:selectItem itemLabel="Eventual"     itemValue="Eventual"   />
+                                    </p:selectOneMenu>
+                                </p:column>  
+                            </p:row> 
+                           
+                        </p:panelGrid>
+                    </p:panel>                    
+                    <p:panel id="combos"  style="margin-bottom:0px;">
+                        <p:panelGrid style="margin-top: 0px; width: 100%" >  
+                            <p:row rendered="#{beanAdminisSolicitud.renderSeccionCentrales}">
+                                <p:column styleClass="ui-widget-header">
+                                    <p:outputLabel value="Direcciones generales y centrales: "/>      
+                                </p:column>
+                                <p:column>
+                                    <p:selectBooleanCheckbox value="#{beanAdminisSolicitud.checkCentrales}" >
+                                        <p:ajax update=":datos:combos :form:solicitudes :estatus" listener="#{beanAdminisSolicitud.cambiaCentrales}"
+                                               onstart="uiBloqueo.show();" oncomplete="uiBloqueo.hide();"/>
+                                   </p:selectBooleanCheckbox>
+                                </p:column>
+                            </p:row> 
+                            <p:row id="unidadCB" rendered="#{beanAdminisSolicitud.renderSeccionA}">
+                                <p:column styleClass="ui-widget-header">
+                                    <p:outputLabel value="Unidad Ejecutora: "/>      
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="unidad" style="cajaTexto" value="#{beanAdminisSolicitud.unidadEjecutoraSeleccionada}" disabled="#{beanAdminisSolicitud.activaSeccionA}" >
+                                        <f:selectItems value="#{beanAdminisSolicitud.unidadesEjecutoras}" var="unidad" 
+                                                       itemLabel="#{unidad.texto}" itemValue="#{unidad.value}" />
+                                        <p:ajax update=":datos:combos" listener="#{beanAdminisSolicitud.actualizaAmbitosCB}"/>
+                                    </p:selectOneMenu>
+
+                                </p:column>
+                            </p:row> 
+                            <p:row  id="ambitoCB" rendered="#{beanAdminisSolicitud.renderSeccionB}">
+                                <p:column styleClass="ui-widget-header">
+                                    <p:outputLabel value="Ámbito: "/>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="ambito" style="cajaTexto" value="#{beanAdminisSolicitud.ambitoSeleccionado}" disabled="#{beanAdminisSolicitud.activaSeccionB}"> 
+                                        <f:selectItems value="#{beanAdminisSolicitud.ambitos}" var="ambito" 
+                                                       itemLabel="#{ambito.texto}" itemValue="#{ambito.value}"   />
+                                        <p:ajax update=":datos:combos" listener="#{beanAdminisSolicitud.actualizaCoordEstatalesCB}" />
+                                    </p:selectOneMenu>
+                                </p:column>
+                            </p:row>    
+                            <p:row id="entidadCB" rendered="#{beanAdminisSolicitud.renderSeccionC}">
+                                <p:column styleClass="ui-widget-header">
+                                    <p:outputLabel value="Entidad: "/>
+                                </p:column>
+                                <p:column>
+                                    <p:selectOneMenu id="coord" style="cajaTexto" value="#{beanAdminisSolicitud.coordEstatalSeleccionada}" disabled="#{beanAdminisSolicitud.activaSeccionC}"> 
+                                        <f:selectItems value="#{beanAdminisSolicitud.coordEstatales}" var="coord" 
+                                                       itemLabel="#{coord.texto}" itemValue="#{coord.value}"   /> 
+                                        <p:ajax update=":datos:combos"  />
+                                    </p:selectOneMenu>
+
+                                </p:column>
+                            </p:row> 
+                            <p:row rendered="#{beanAdminisSolicitud.renderSeccionRenovaciones}">
+                                <p:column styleClass="ui-widget-header">
+                                    <p:outputLabel value="Renovaciones: "/>      
+                                </p:column>
+                                <p:column>
+                                    <p:selectBooleanCheckbox value="#{beanAdminisSolicitud.checkRenovaciones}" >                                       
+                                   </p:selectBooleanCheckbox>
+                                </p:column>
+                            </p:row> 
+                            <p:row>
+                                <p:column style="width: 30%" styleClass="ui-widget-header">  
+                                </p:column>
+                                <p:column >
+                                    <p:commandButton  value="Filtrar" actionListener="#{beanAdminisSolicitud.filtrado}" update=":form:solicitudes :estatus " onclick="uiBloqueo.show();" oncomplete="uiBloqueo.hide();"/>
+                                    <p:commandButton  value="Limpiar" actionListener="#{beanAdminisSolicitud.regresarAdministrador}" update=":form:solicitudes :estatus " onclick="uiBloqueo.show();" oncomplete="uiBloqueo.hide();"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>                       
+                    </p:panel> 
+                </h:form> 
+                </td>           
+                </tr>
+                <tr>                
+                    <td>
+                <p:panel style="margin-bottom:10px; align-items:center; width: 100% " id="estatus">  
+                    <table>
+                        <tr>
+                            <td style="width: 15%">
+                        <p:dataTable var="totales" value="#{beanAdminisSolicitud.listaTableEstatusPorcentajes}">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion" />
+                                </f:facet>
+                                <h:outputText value="#{totales.descripcion}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Totales" />
+                                </f:facet>
+                                <h:outputText value="#{totales.total}" />
+                            </p:column>                     
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="%" />
+                                </f:facet>
+                                <h:outputText value="#{totales.porcentaje}" />
+                            </p:column> 
+                        </p:dataTable>   
+                        </td>                       
+                        <td style="width: 35%">
+                        <p:panel id="pnlGraficasEstatus">  
+                            <p:pieChart value="#{beanAdminisSolicitud.graficaEstatus}"  legendPosition="e" sliceMargin="5" diameter="150" fill="true"/>       
+                        </p:panel>
+                        </td>
+                        <td style="width: 15%">
+                        <p:dataTable var="servicios" value="#{beanAdminisSolicitud.listaTableServicios}">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Número de solicitudes" />
+                                </f:facet>
+                                <h:outputText value="#{servicios.total}" />
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Trámites" />   
+                                </f:facet>
+                                <h:outputText value="#{servicios.descripcion}" />
+                            </p:column>
+                        </p:dataTable>   
+                        </td>
+                        <td style="width: 35%" >
+                        <p:panel id="pnlGraficasServicios">  
+                            <p:pieChart value="#{beanAdminisSolicitud.graficaServicios}"  legendPosition="e" sliceMargin="5" diameter="150" fill="true"/>       
+                        </p:panel>
+                        </td>
+                        </tr>
+                    </table>
+                </p:panel> 
+                </td>
+                </tr> 
+                <tr>
+                    <td>
+                <p:panel  header="Consulta de Solicitudes" style="margin-bottom:10px; align-items:center; width: 100% " id="pnlDatos" >  
+                    <h:form id="form">                            
+                        <p:dataTable style="width: 100%; align-content: center; align-items: center" id="solicitudes" var="solicitud"  value="#{beanAdminisSolicitud.solicitudes}" 
+                                     binding="#{beanAdminisSolicitud.tableRegistros}" paginator="true" rows="5"
+                                     widgetVar="solicitudTable"   filteredValue="#{beanAdminisSolicitud.filteredSolicitudes}"
+                                     selection="#{beanAdminisSolicitud.solicitudSeleccionada}" rowKey="#{solicitud.id_motivo}"  >                             
+                            <p:column exportable="false" style="text-align: center;width: 30px" filterMatchMode="contains" 
+                                      sortBy="#{solicitud.consecutivo},#{solicitud.fecha_solicitud}, #{solicitud.folio}"
+                                      filterBy="#{solicitud.consecutivo}, #{solicitud.fecha_solicitud}, #{solicitud.folio}" filterStyle="width:100px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Solicitud, Fecha y Hora, Folio"/>
+                                </f:facet>
+                                <p:outputLabel style="font-weight: bold" value="Solicitud: #{solicitud.consecutivo}"/>
+                                <p:separator/>
+                                <p:outputLabel value="#{solicitud.fecha_solicitud} " />           
+                                <p:separator/>
+                                <p:outputLabel style="font-weight: bold" value="Folio: #{solicitud.folio} " />                                 
+                            </p:column>
+                            <p:column exportable="false" style="text-align: left" filterMatchMode="contains" 
+                                      sortBy="#{solicitud.rfc},#{solicitud.curp},#{solicitud.nombre},#{solicitud.email},#{solicitud.area},#{solicitud.estado}"
+                                      filterBy="#{solicitud.rfc},#{solicitud.curp},#{solicitud.nombre},#{solicitud.email},#{solicitud.area},#{solicitud.estado}" 
+                                      filterStyle="width:300px;" >
+                                <f:facet   name="header" >
+                                    <h:outputText style="text-align: center" value="RFC, CURP, Nombre y Correo electrónico"  />
+                                </f:facet>                                   
+                                <p:commandLink onclick="PF('dialogTablaEmpleado').show();"
+                                               action="#{beanAdminisSolicitud.obtieneHistorico}" update=":formHistorial:solicitudesHistorial" >
+                                    <h:graphicImage>                                        
+                                        <img src="imagenes/add.jpg" />
+                                    </h:graphicImage>
+                                </p:commandLink>
+                                <br/>
+                                <p:outputLabel value="#{solicitud.rfc}"/> 
+                                <br/>  
+                                <p:outputLabel value="#{solicitud.curp}"/>  
+                                <br/>  
+                                <p:outputLabel value="#{solicitud.nombre}"/>                                
+                                <br/>                           
+                                <p:commandLink  value="#{solicitud.email}"/>                                    
+                                <br/>  
+                                <p:outputLabel value="#{solicitud.area} " />  
+                                <br/>  
+                                <p:outputLabel value="#{solicitud.estado} " />    
+                                <p:separator/>
+                                <p:outputLabel style="font-weight: bold" value="Ambito: #{solicitud.ambitoDescripcion} " /> 
+                            </p:column>
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.nombramiento}"
+                                       filterBy="#{solicitud.nombramiento}" filterStyle="width:100px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Nombramiento"/>
+                                </f:facet>
+                                <p:outputLabel value="#{solicitud.nombramiento} " />                                         
+                            </p:column>
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.contratacion}"
+                                       filterBy="#{solicitud.contratacion}" filterStyle="width:100px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Tipo de Contratación"/>
+                                </f:facet>
+                                <p:outputLabel value="#{solicitud.contratacion} " />                                         
+                            </p:column>     
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.extension}"
+                                       filterBy="#{solicitud.extension}" filterStyle="width:100px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Extension"/>
+                                </f:facet>
+                                <p:outputLabel value="#{solicitud.extension} " />                                         
+                            </p:column>
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.servicio}"
+                                       filterBy="#{solicitud.servicio}" filterStyle="width:200px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Trámite"/>
+                                </f:facet>
+                                <p:outputLabel value="#{solicitud.servicio} " />                                         
+                            </p:column>                                                      
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.ultimo_movimiento}"
+                                       filterBy="#{solicitud.ultimo_movimiento}" filterStyle="width:150px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Fecha de Última actulización"/>
+                                </f:facet>
+                                <p:outputLabel value="#{solicitud.ultimo_movimiento} " />                                         
+                            </p:column>
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.comentarios},#{solicitud.motivo},#{solicitud.motivoCapturado}"
+                                       filterBy="#{solicitud.comentarios},#{solicitud.motivo},#{solicitud.motivoCapturado}" filterStyle="width:200px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Motivos/Comentarios"/>
+                                </f:facet>                               
+                                <p:outputLabel value="#{solicitud.motivo} "/>  
+                                <br/>
+                                <p:outputLabel value="#{solicitud.motivoCapturado} " /> 
+                                <br/>
+                                <p:outputLabel value="#{solicitud.comentarios} " />  
+                            </p:column>
+                            <p:column  exportable="false" style="text-align: center" filterMatchMode="contains" sortBy="#{solicitud.observaciones},#{solicitud.motivoRechazo},#{solicitud.motivoCapturadoRechazo}"
+                                       filterBy="#{solicitud.observaciones},#{solicitud.motivoRechazo},#{solicitud.motivoCapturadoRechazo}" filterStyle="width:200px;" >
+                                <f:facet  name="header" >
+                                    <h:outputText value="Motivos-Rechazo/Observaciones"/>
+                                </f:facet>                               
+                                <p:outputLabel value="#{solicitud.motivoRechazo} " />  
+                                <br/>
+                                <p:outputLabel value="#{solicitud.motivoCapturadoRechazo} " /> 
+                                <br/>
+                                <p:outputLabel value="#{solicitud.observaciones} " /> 
+                            </p:column>                           
+                            <p:column exportable="false" filterStyle="width:100px;" rendered="#{beanAdminisSolicitud.muestraBotonAtender}">
+                                <f:facet  name="header" >
+                                    <h:outputText value="Atender"  />
+                                </f:facet>
+                                <p:commandButton value="#{solicitud.status}" action="#{beanAdminisSolicitud.varSolicitud}" process="@this"    />                               
+                            </p:column>
+                            <p:column  exportable="false" style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="ID_SERVICIO" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.id_servicio}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  exportable="false" style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="NUM_EMPLEADO" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.num_empleado}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="No.Solicitud" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.consecutivo}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Fecha" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.fecha_solicitud}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Folio" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.folio}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Unidad" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.unidad_ejecutora}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Nombre" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.nombre}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="CURP" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.curp}" ></p:outputLabel>
+                            </p:column>                            
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Estado" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.estado}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Tipo de Contratación" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.contratacion}" ></p:outputLabel>
+                            </p:column>  
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Tipo de Solicitud" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.servicio}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Motivo" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.motivo} #{solicitud.motivoCapturado}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Observaciónes" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.observaciones}" ></p:outputLabel>
+                            </p:column> 
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Status" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.status}" ></p:outputLabel>
+                            </p:column>
+                            <p:column  style ="display: none;">
+                                <f:facet name="header" >
+                                    <h:outputText value="Comentarios" style="display: none;"  />
+                                </f:facet>      
+                                <p:outputLabel style="display: none;" value="#{solicitud.comentarios}" ></p:outputLabel>
+                            </p:column>
+                        </p:dataTable>
+                        <p:separator></p:separator>
+                        <h:commandLink  id="reporteXLS" styleClass="ui-widget-header">
+                            <h:graphicImage value="imagenes/excel.jpg" /> 
+                            <p:dataExporter type="xls"  target="solicitudes" fileName="AdministracionServicios" postProcessor="#{beanAdminisSolicitud.formatoArchivoExcel}" />
+                        </h:commandLink>                    
+                    </h:form>    
+                </p:panel>
+                </td>
+                </tr>
+            </table>
+            <p:blockUI block="panelGeneral" widgetVar="uiBloqueo">
+                Cargando información, espere un momento por favor...<br/>
+                <br/> 
+                <p:graphicImage width="45" height="45" value="imagenes/load.gif"/> 
+            </p:blockUI>   
+            <h:form id="formHistorial">
+                <p:panel id="panelHistorialEmpleado">
+                    <p:dialog header="Historial"  id="dialogTablaEmpleado" widgetVar="dialogTablaEmpleado" height="450px" width="830px"> 
+                        <p:panel  header="Ultimas solicitudes: #{beanAdminisSolicitud.solicitudSeleccionada.nombre}"  
+                                  style="margin-bottom:10px; align-items:center " >  
+                            <p:dataTable style="width:690px; height:420px;"
+                                         id="solicitudesHistorial" 
+                                         var="solicitudHistorico"  value="#{beanAdminisSolicitud.solicitudesHistorial}"                                
+                                         rowKey="#{solicitudHistorico.id_motivo}" >                    
+                                <p:column  style="width:30px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Solicitud"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: center" value="#{solicitudHistorico.consecutivo} " />                                
+                                </p:column>                    
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Nombre"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: center" value="#{beanAdminisSolicitud.solicitudSeleccionada.nombre} " />                                
+                                </p:column>  
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Servicio"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.servicio} " />                                
+                                </p:column>
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Fecha de creación"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: center" value="#{solicitudHistorico.fecha_solicitud} " />                                
+                                </p:column>                        
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Motivo"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.motivo} " />    
+                                    <br/>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.motivoCapturado} " />                                
+                                </p:column>                                
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Comentarios"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.comentarios} " />                                
+                                </p:column>
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Motivo/Rechazo"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.motivoRechazo} " /> 
+                                    <br/>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.motivoCapturadoRechazo} " />                                
+                                </p:column>
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Observaciones"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: justify" value="#{solicitudHistorico.observaciones} " />                                
+                                </p:column>
+                                <p:column  style="width:80px; height: 35px;" >
+                                    <f:facet  name="header" >
+                                        <h:outputText value="Estado de la solicitud"  />
+                                    </f:facet>
+                                    <h:outputText style="text-align: left" value="#{solicitudHistorico.status} " />                                
+                                </p:column>                       
+                            </p:dataTable>
+                        </p:panel>
+                    </p:dialog>
+                </p:panel>
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>

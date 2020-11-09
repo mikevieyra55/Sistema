@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTcMenuTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_idMenu}" for="idMenu" />
+                    <h:inputText id="idMenu" value="#{tcMenuController.selected.idMenu}" title="#{bundle.CreateTcMenuTitle_idMenu}" required="true" requiredMessage="#{bundle.CreateTcMenuRequiredMessage_idMenu}"/>
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tcMenuController.selected.nombre}" title="#{bundle.CreateTcMenuTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_controlador}" for="controlador" />
+                    <h:inputText id="controlador" value="#{tcMenuController.selected.controlador}" title="#{bundle.CreateTcMenuTitle_controlador}" />
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_activo}" for="activo" />
+                    <h:inputText id="activo" value="#{tcMenuController.selected.activo}" title="#{bundle.CreateTcMenuTitle_activo}" />
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_fechaDeAlta}" for="fechaDeAlta" />
+                    <h:inputText id="fechaDeAlta" value="#{tcMenuController.selected.fechaDeAlta}" title="#{bundle.CreateTcMenuTitle_fechaDeAlta}" />
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{tcMenuController.selected.idUsuario}" title="#{bundle.CreateTcMenuTitle_idUsuario}" />
+                    <h:outputLabel value="#{bundle.CreateTcMenuLabel_idPadre}" for="idPadre" />
+                    <h:inputText id="idPadre" value="#{tcMenuController.selected.idPadre}" title="#{bundle.CreateTcMenuTitle_idPadre}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tcMenuController.create}" value="#{bundle.CreateTcMenuSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tcMenuController.prepareList}" value="#{bundle.CreateTcMenuShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTcMenuIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
